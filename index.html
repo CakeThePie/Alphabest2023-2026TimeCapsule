@@ -198,6 +198,20 @@ body::before {
         width: 100%;
     }
 }
+/* ===== LOGO ANIMATION FIX ===== */
+.logo {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
+    z-index: 2;
+}
+
+.logo.fly {
+    transform: translate(-48vw, -48vh) scale(0.75);
+}
+
 </style>
 </head>
 
@@ -259,11 +273,7 @@ function login() {
     setTimeout(() => {
         const logos = document.getElementById("logoGroup");
 
-        logos.style.position = "fixed";
-        logos.style.top = "20px";
-        logos.style.left = "20px";
-        logos.style.margin = "0";
-        logos.style.transform = "scale(0.75)";
+        logos.classList.add("fly");
 
         document.getElementById("fade-black").style.opacity = "0.85";
         document.body.style.pointerEvents = "none";

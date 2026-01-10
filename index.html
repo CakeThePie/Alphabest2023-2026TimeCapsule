@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Alphabest Time Capsule</title>
-
 <style>
 * {
     box-sizing: border-box;
@@ -13,15 +12,13 @@
 body {
     margin: 0;
     height: 100vh;
-    background: url("https://img.goodfon.com/original/1920x1080/b/47/karta-mira-zemlia-fon-materiki.jpg")
-                center / cover no-repeat;
+    background: url("https://img.goodfon.com/original/1920x1080/b/47/karta-mira-zemlia-fon-materiki.jpg") center / cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
 }
 
-/* ===== GIỮ NGUYÊN BLUR ===== */
 body::before {
     content: "";
     position: fixed;
@@ -29,10 +26,8 @@ body::before {
     background: rgba(0,0,0,0.45);
     backdrop-filter: blur(1px);
     z-index: 0;
-    transition: opacity 2s ease;
 }
 
-/* overlay đen để fade */
 #fade-black {
     position: fixed;
     inset: 0;
@@ -51,27 +46,20 @@ body::before {
 
 /* ===== LOGO ===== */
 .logo {
-    position: relative; /* giữ relative để ban đầu vẫn đúng giữa form */
+    position: relative; /* giữ relative để lúc load vẫn đúng giữa form */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
     margin-bottom: 30px;
-    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
 }
-}
-
-.logo.fly {
-    transform: translate(-90%, -90%) scale(0.5); /* bay lên góc trên bên trái */
-}
-
 
 .logo img {
     width: 70px;
     opacity: 0.95;
 }
 
-/* ===== INPUT GROUP (GIỮ NGUYÊN) ===== */
+/* ===== INPUT GROUP ===== */
 .input-group {
     display: flex;
     width: 520px;
@@ -121,7 +109,7 @@ body::before {
     font-size: 18px;
 }
 
-/* ===== CHECKBOX (GIỮ NGUYÊN) ===== */
+/* ===== CHECKBOX ===== */
 .options {
     width: 520px;
     margin: 14px auto 30px;
@@ -205,12 +193,8 @@ body::before {
         width: 100%;
     }
 }
-
-
-
 </style>
 </head>
-
 <body>
 
 <div id="fade-black"></div>
@@ -261,21 +245,34 @@ function login() {
         return;
     }
 
-    // success message
     error.style.color = "#9dffb3";
     error.innerText = "Login successful…";
 
-    // pause cho người dùng bắt kịp
     setTimeout(() => {
         const logos = document.getElementById("logoGroup");
 
-        logos.classList.add("fly");
+        // Lấy tọa độ hiện tại để chuyển sang fixed
+        const rect = logos.getBoundingClientRect();
+        logos.style.position = "fixed";
+        logos.style.left = rect.left + "px";
+        logos.style.top = rect.top + "px";
+        logos.style.margin = 0;
+
+        // đặt transition trước
+        logos.style.transition = "transform 1.8s cubic-bezier(.4,0,.2,1)";
+
+        // force browser nhận diện style cũ
+        logos.offsetHeight;
+
+        // trigger transform trong tick riêng để animation chạy
+        setTimeout(() => {
+            logos.style.transform = "translate(-220px, -260px) scale(0.5)";
+        }, 10);
 
         document.getElementById("fade-black").style.opacity = "0.85";
         document.body.style.pointerEvents = "none";
     }, 1500);
 
-    // redirect sang home
     setTimeout(() => {
         window.location.href = "home.html";
     }, 3800);

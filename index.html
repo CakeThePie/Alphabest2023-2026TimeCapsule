@@ -22,65 +22,57 @@ body {
     overflow: hidden;
 }
 
-/* overlay */
-body::before {
-    content: "";
+/* overlay background */
+#bg-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.45);
     backdrop-filter: blur(1px);
+    transition: opacity 1.2s ease;
     z-index: 0;
 }
 
 /* ================= LOGIN ================= */
 #login {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    transition: opacity 0.8s ease;
 }
 
 .login-wrapper {
     text-align: center;
 }
 
+/* LOGO */
 .logo {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 16px;
     margin-bottom: 30px;
+    transition: all 1.2s cubic-bezier(.4,0,.2,1);
 }
 
 .logo img {
     width: 70px;
-    opacity: 0.95;
 }
 
-/* INPUT GROUP */
+/* INPUT */
 .input-group {
     display: flex;
     width: 520px;
-    border-radius: 4px;
     overflow: hidden;
     margin: 0 auto;
 }
 
 .input-box {
-    position: relative;
     width: 50%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    background: rgba(0,0,0,0.5);
+    transition: transform .2s ease;
 }
 
 .input-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-
-.input-box.username {
-    background: rgba(0, 0, 0, 0.45);
-}
-
-.input-box.password {
-    background: rgba(0, 0, 0, 0.55);
 }
 
 .input-box input {
@@ -90,11 +82,6 @@ body::before {
     border: none;
     outline: none;
     color: white;
-    font-size: 16px;
-}
-
-.input-box input::placeholder {
-    color: #f0f0f0;
 }
 
 .icon {
@@ -102,13 +89,12 @@ body::before {
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 18px;
 }
 
 /* CHECKBOX */
 .options {
     width: 520px;
-    margin: 14px auto 30px;
+    margin: 14px auto 20px;
     text-align: left;
     font-size: 14px;
 }
@@ -117,7 +103,6 @@ body::before {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #eee;
 }
 
 .checkbox input {
@@ -130,87 +115,31 @@ body::before {
     border-radius: 6px;
     background: white;
     margin-right: 10px;
-    position: relative;
 }
 
 .checkbox input:checked + .custom-check {
     background: #2e9dff;
 }
 
-.checkbox input:checked + .custom-check::after {
-    content: "✓";
-    position: absolute;
-    color: white;
-    font-size: 14px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -55%);
-}
-
 /* BUTTON */
 .login-btn {
     width: 240px;
     padding: 14px;
-    background: #111111;
+    background: #111;
     border: none;
-    color: #ffffff;
-    font-size: 16px;
-    border-radius: 4px;
+    color: white;
     cursor: pointer;
-    transition: 0.2s;
-    outline: 1px solid rgba(255,255,255,0.08);
 }
 
 .login-btn:hover {
-    background: #333333;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    background: #333;
 }
 
-.error {
-    margin-top: 15px;
-    color: #ffb3b3;
-}
-
-/* ================= INTRO ================= */
-#intro {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-.intro-logos {
-    position: relative;
-    width: 320px;
-    height: 120px;
-}
-
-.intro-logos img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    opacity: 0;
-    transition: 1s cubic-bezier(.4,0,.2,1);
-}
-
-.intro-logos .left {
-    left: -140px;
-}
-
-.intro-logos .right {
-    right: -140px;
-}
-
-.intro-logos img.show {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-}
-
-.intro-logos img.zoom {
-    transform: translateY(-50%) scale(1.6);
+/* MESSAGE */
+.message {
+    margin-top: 14px;
+    min-height: 20px;
+    font-size: 14px;
 }
 
 /* ================= HOME ================= */
@@ -219,69 +148,46 @@ body::before {
     inset: 0;
     background: #0b0b0b;
     display: none;
-    z-index: 5;
+    z-index: 1;
 }
 
 header {
     height: 64px;
-    background: #000;
     display: flex;
     align-items: center;
     padding: 0 20px;
 }
 
 header img {
-    height: 40px;
+    height: 36px;
     margin-right: 12px;
 }
 
 .main {
     padding: 60px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 1s ease;
-}
-
-.main.show {
-    opacity: 1;
-    transform: none;
-}
-
-/* responsive */
-@media (max-width: 600px) {
-    .input-group,
-    .options {
-        width: 90%;
-    }
-
-    .input-group {
-        flex-direction: column;
-    }
-
-    .input-box {
-        width: 100%;
-    }
 }
 </style>
 </head>
 
 <body>
 
+<div id="bg-overlay"></div>
+
 <!-- LOGIN -->
 <div id="login">
     <div class="login-wrapper">
 
-        <div class="logo">
+        <div class="logo" id="logoGroup">
             <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
             <img src="Alphabest Logo.png">
         </div>
 
         <div class="input-group">
-            <div class="input-box username">
+            <div class="input-box">
                 <span class="icon">👤</span>
                 <input id="username" placeholder="Username">
             </div>
-            <div class="input-box password">
+            <div class="input-box">
                 <span class="icon">🔒</span>
                 <input id="password" type="password" placeholder="Password">
             </div>
@@ -296,15 +202,7 @@ header img {
         </div>
 
         <button class="login-btn" onclick="login()">Sign In</button>
-        <div class="error" id="error"></div>
-    </div>
-</div>
-
-<!-- INTRO -->
-<div id="intro">
-    <div class="intro-logos">
-        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" class="left" id="logo1">
-        <img src="Alphabest Logo.png" class="right" id="logo2">
+        <div class="message" id="message"></div>
     </div>
 </div>
 
@@ -315,7 +213,7 @@ header img {
         <img src="Alphabest Logo.png">
     </header>
 
-    <div class="main" id="main">
+    <div class="main">
         <h1>Welcome to Alphabest Time Capsule</h1>
         <p>Memories · Moments · History</p>
     </div>
@@ -326,38 +224,41 @@ const USERNAME = "admin";
 const PASSWORD = "alphabest";
 
 function login() {
+    const msg = document.getElementById("message");
     const u = username.value;
     const p = password.value;
-    const error = document.getElementById("error");
 
     if (u !== USERNAME || p !== PASSWORD) {
-        error.innerText = "Invalid credentials";
+        msg.style.color = "#ffb3b3";
+        msg.innerText = "Invalid credentials";
         return;
     }
 
-    document.getElementById("login").style.display = "none";
+    // success message
+    msg.style.color = "#9dffb3";
+    msg.innerText = "Login successful. Redirecting...";
 
-    const intro = document.getElementById("intro");
-    intro.style.display = "flex";
+    // animate logos to top-right
+    const logos = document.getElementById("logoGroup");
+    logos.style.position = "fixed";
+    logos.style.top = "20px";
+    logos.style.right = "20px";
+    logos.style.margin = "0";
+    logos.style.transform = "scale(0.8)";
 
-    const l1 = document.getElementById("logo1");
-    const l2 = document.getElementById("logo2");
+    // fade background
+    document.getElementById("bg-overlay").style.opacity = "0";
 
+    // hide login
     setTimeout(() => {
-        l1.classList.add("show");
-        l2.classList.add("show");
-    }, 200);
+        document.getElementById("login").style.opacity = "0";
+    }, 400);
 
+    // show home
     setTimeout(() => {
-        l1.classList.add("zoom");
-        l2.classList.add("zoom");
-    }, 1200);
-
-    setTimeout(() => {
-        intro.style.display = "none";
+        document.getElementById("login").style.display = "none";
         document.getElementById("home").style.display = "block";
-        document.getElementById("main").classList.add("show");
-    }, 2600);
+    }, 1200);
 }
 </script>
 

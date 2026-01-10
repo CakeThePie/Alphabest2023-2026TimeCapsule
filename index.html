@@ -50,6 +50,14 @@ body::before {
 }
 
 /* ===== LOGO ===== */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    transition: all 1.8s cubic-bezier(.4,0,.2,1);
+}
 
 .logo img {
     width: 70px;
@@ -192,15 +200,6 @@ body::before {
 }
 /* ===== LOGO ANIMATION FIX ===== */
 /* ===== LOGO STATE BÌNH THƯỜNG (LOGIN) ===== */
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 30px;
-    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
-}
-
 /* ===== LOGO BAY KHI LOGIN SUCCESS ===== */
 .logo.fly {
     position: fixed;

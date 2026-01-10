@@ -19,8 +19,10 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+    overflow: hidden;
 }
 
+/* overlay */
 body::before {
     content: "";
     position: fixed;
@@ -30,9 +32,13 @@ body::before {
     z-index: 0;
 }
 
-.login-wrapper {
+/* ================= LOGIN ================= */
+#login {
     position: relative;
     z-index: 1;
+}
+
+.login-wrapper {
     text-align: center;
 }
 
@@ -40,12 +46,12 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;        /* khoảng cách giữa 2 logo */
+    gap: 16px;
     margin-bottom: 30px;
 }
 
 .logo img {
-    width: 70px;      /* chỉnh size nếu muốn */
+    width: 70px;
     opacity: 0.95;
 }
 
@@ -58,19 +64,23 @@ body::before {
     margin: 0 auto;
 }
 
-/* USERNAME */
+.input-box {
+    position: relative;
+    width: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
 .input-box.username {
     background: rgba(0, 0, 0, 0.45);
 }
 
-/* PASSWORD */
 .input-box.password {
     background: rgba(0, 0, 0, 0.55);
-}
-
-.input-box {
-    position: relative;
-    width: 50%;
 }
 
 .input-box input {
@@ -87,13 +97,12 @@ body::before {
     color: #f0f0f0;
 }
 
-.input-box .icon {
+.icon {
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    opacity: 0.9;
 }
 
 /* CHECKBOX */
@@ -149,13 +158,12 @@ body::before {
     border-radius: 4px;
     cursor: pointer;
     transition: 0.2s;
-    outline: 1px solid rgba(255,255,255,0.08)
+    outline: 1px solid rgba(255,255,255,0.08);
 }
 
 .login-btn:hover {
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.08),
-                0 12px 30px rgba(0,0,0,0.6);
     background: #333333;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
 .error {
@@ -163,6 +171,83 @@ body::before {
     color: #ffb3b3;
 }
 
+/* ================= INTRO ================= */
+#intro {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.intro-logos {
+    position: relative;
+    width: 320px;
+    height: 120px;
+}
+
+.intro-logos img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0;
+    transition: 1s cubic-bezier(.4,0,.2,1);
+}
+
+.intro-logos .left {
+    left: -140px;
+}
+
+.intro-logos .right {
+    right: -140px;
+}
+
+.intro-logos img.show {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.intro-logos img.zoom {
+    transform: translateY(-50%) scale(1.6);
+}
+
+/* ================= HOME ================= */
+#home {
+    position: fixed;
+    inset: 0;
+    background: #0b0b0b;
+    display: none;
+    z-index: 5;
+}
+
+header {
+    height: 64px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header img {
+    height: 40px;
+    margin-right: 12px;
+}
+
+.main {
+    padding: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s ease;
+}
+
+.main.show {
+    opacity: 1;
+    transform: none;
+}
+
+/* responsive */
 @media (max-width: 600px) {
     .input-group,
     .options {
@@ -177,55 +262,63 @@ body::before {
         width: 100%;
     }
 }
-/* Hover nhẹ cho ô input */
-.input-box {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.input-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="login-wrapper">
+<!-- LOGIN -->
+<div id="login">
+    <div class="login-wrapper">
 
-    <!-- LOGO -->
-<div class="logo">
-    <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" alt="Logo 1">
-    <img src="Alphabest Logo.png" alt="Logo 2">
+        <div class="logo">
+            <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
+            <img src="Alphabest Logo.png">
+        </div>
+
+        <div class="input-group">
+            <div class="input-box username">
+                <span class="icon">👤</span>
+                <input id="username" placeholder="Username">
+            </div>
+            <div class="input-box password">
+                <span class="icon">🔒</span>
+                <input id="password" type="password" placeholder="Password">
+            </div>
+        </div>
+
+        <div class="options">
+            <label class="checkbox">
+                <input type="checkbox" checked>
+                <span class="custom-check"></span>
+                Erase data after log out?
+            </label>
+        </div>
+
+        <button class="login-btn" onclick="login()">Sign In</button>
+        <div class="error" id="error"></div>
+    </div>
 </div>
 
-    <!-- INPUTS -->
-    <div class="input-group">
-        <div class="input-box username">
-            <span class="icon">👤</span>
-            <input type="text" id="username" placeholder="Username">
-        </div>
-
-        <div class="input-box password">
-            <span class="icon">🔒</span>
-            <input type="password" id="password" placeholder="Password">
-        </div>
+<!-- INTRO -->
+<div id="intro">
+    <div class="intro-logos">
+        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" class="left" id="logo1">
+        <img src="Alphabest Logo.png" class="right" id="logo2">
     </div>
+</div>
 
-    <!-- CHECKBOX -->
-    <div class="options">
-        <label class="checkbox">
-            <input type="checkbox" checked>
-            <span class="custom-check"></span>
-            Erase data after log out?
-        </label>
+<!-- HOME -->
+<div id="home">
+    <header>
+        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
+        <img src="Alphabest Logo.png">
+    </header>
+
+    <div class="main" id="main">
+        <h1>Welcome to Alphabest Time Capsule</h1>
+        <p>Memories · Moments · History</p>
     </div>
-
-    <!-- BUTTON -->
-    <button class="login-btn" onclick="login()">Sign In</button>
-
-    <div class="error" id="error"></div>
 </div>
 
 <script>
@@ -233,15 +326,38 @@ const USERNAME = "admin";
 const PASSWORD = "alphabest";
 
 function login() {
-    const u = document.getElementById("username").value;
-    const p = document.getElementById("password").value;
+    const u = username.value;
+    const p = password.value;
     const error = document.getElementById("error");
 
-    if (u === USERNAME && p === PASSWORD) {
-        alert("Access granted 🔓");
-    } else {
+    if (u !== USERNAME || p !== PASSWORD) {
         error.innerText = "Invalid credentials";
+        return;
     }
+
+    document.getElementById("login").style.display = "none";
+
+    const intro = document.getElementById("intro");
+    intro.style.display = "flex";
+
+    const l1 = document.getElementById("logo1");
+    const l2 = document.getElementById("logo2");
+
+    setTimeout(() => {
+        l1.classList.add("show");
+        l2.classList.add("show");
+    }, 200);
+
+    setTimeout(() => {
+        l1.classList.add("zoom");
+        l2.classList.add("zoom");
+    }, 1200);
+
+    setTimeout(() => {
+        intro.style.display = "none";
+        document.getElementById("home").style.display = "block";
+        document.getElementById("main").classList.add("show");
+    }, 2600);
 }
 </script>
 

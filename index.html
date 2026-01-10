@@ -51,20 +51,17 @@ body::before {
 
 /* ===== LOGO ===== */
 .logo {
-    position: absolute; /* thay vì relative */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: relative; /* giữ như cũ */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
     margin-bottom: 30px;
-    transition: all 1.8s cubic-bezier(.4,0,.2,1);
+    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
 }
 
 .logo.fly {
-    transform: translate(48vw, -48vh) scale(0.5);
+    transform: translate(-180px, -250px) scale(1); /* chỉnh theo ý bạn */
 }
 
 

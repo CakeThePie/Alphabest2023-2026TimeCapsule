@@ -36,10 +36,17 @@ body::before {
     text-align: center;
 }
 
-.logo img {
-    width: 80px;
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;        /* khoảng cách giữa 2 logo */
     margin-bottom: 30px;
-    opacity: 0.9;
+}
+
+.logo img {
+    width: 70px;      /* chỉnh size nếu muốn */
+    opacity: 0.95;
 }
 
 /* INPUT GROUP */
@@ -175,9 +182,10 @@ body::before {
 <div class="login-wrapper">
 
     <!-- LOGO -->
-    <div class="logo">
-        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" alt="Logo">
-    </div>
+<div class="logo">
+    <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" alt="Logo 1">
+    <img src="logo2.png" alt="Logo 2">
+</div>
 
     <!-- INPUTS -->
     <div class="input-group">

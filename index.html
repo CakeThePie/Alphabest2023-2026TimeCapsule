@@ -51,15 +51,12 @@ body::before {
     align-items: center;
     gap: 16px;
     margin-bottom: 30px;
-    transition: all 1.8s cubic-bezier(.4,0,.2,1);
+    transition: transform 1.8s cubic-bezier(.4,0,.2,1);
 }
 
-/* LOGO khi bay lên góc */
+/* Khi login, logo bay lên góc */
 .logo.fly {
-    position: absolute;      /* responsive: vẫn trong flow wrapper */
-    top: 10px;               /* gần góc trên */
-    left: 10px;              /* gần góc trái */
-    margin: 0;
+    transform: translate(-200px, -200px); /* chỉnh để bay lên góc trên trái */
 }
 
 /* INPUTS */
@@ -204,8 +201,8 @@ body::before {
 <div class="login-wrapper">
 
     <div class="logo" id="logoGroup">
-        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
-        <img src="Alphabest Logo.png">
+        <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png" alt="Logo1">
+        <img src="Alphabest Logo.png" alt="Logo2">
     </div>
 
     <div class="input-group">
@@ -250,9 +247,9 @@ function login() {
     error.style.color = "#9dffb3";
     error.innerText = "Login successful…";
 
+    // Thêm class fly, CSS sẽ handle transform
     setTimeout(() => {
         const logos = document.getElementById("logoGroup");
-        // thêm class fly, CSS sẽ handle mọi thứ mượt mà
         logos.classList.add("fly");
 
         document.getElementById("fade-black").style.opacity = "0.85";

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Alphabest Login</title>
+<title>Alphabest Time Capsule</title>
 
 <style>
 * {
@@ -18,50 +18,78 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    color: white;
 }
 
-/* overlay for fade */
-#fade {
+/* ===== GIỮ NGUYÊN BLUR ===== */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(1px);
+    z-index: 0;
+    transition: opacity 2s ease;
+}
+
+/* overlay đen để fade */
+#fade-black {
     position: fixed;
     inset: 0;
     background: black;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 2s ease;
-    z-index: 1;
+    z-index: 0;
 }
 
-/* LOGIN */
-#login {
+.login-wrapper {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
 }
 
-/* LOGO */
+/* ===== LOGO ===== */
 .logo {
     display: flex;
-    gap: 16px;
     justify-content: center;
+    align-items: center;
+    gap: 16px;
     margin-bottom: 30px;
     transition: all 1.8s cubic-bezier(.4,0,.2,1);
 }
 
 .logo img {
     width: 70px;
+    opacity: 0.95;
 }
 
-/* INPUT */
+/* ===== INPUT GROUP (GIỮ NGUYÊN) ===== */
 .input-group {
     display: flex;
     width: 520px;
+    border-radius: 4px;
+    overflow: hidden;
     margin: 0 auto;
 }
 
+.input-box.username {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.input-box.password {
+    background: rgba(0, 0, 0, 0.55);
+}
+
 .input-box {
-    width: 50%;
     position: relative;
-    background: rgba(0,0,0,0.5);
+    width: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
 .input-box input {
@@ -71,39 +99,113 @@ body {
     border: none;
     outline: none;
     color: white;
+    font-size: 16px;
 }
 
-.icon {
+.input-box input::placeholder {
+    color: #f0f0f0;
+}
+
+.input-box .icon {
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 18px;
 }
 
-/* BUTTON */
-button {
-    margin-top: 24px;
-    padding: 14px 40px;
-    background: #111;
-    border: none;
-    color: white;
+/* ===== CHECKBOX (GIỮ NGUYÊN) ===== */
+.options {
+    width: 520px;
+    margin: 14px auto 30px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    color: #eee;
 }
 
-/* MESSAGE */
-#msg {
-    margin-top: 16px;
-    color: #9dffb3;
+.checkbox input {
+    display: none;
+}
+
+.custom-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: white;
+    margin-right: 10px;
+    position: relative;
+}
+
+.checkbox input:checked + .custom-check {
+    background: #2e9dff;
+}
+
+.checkbox input:checked + .custom-check::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -55%);
+}
+
+/* ===== BUTTON ===== */
+.login-btn {
+    width: 240px;
+    padding: 14px;
+    background: #111111;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    outline: 1px solid rgba(255,255,255,0.08);
+}
+
+.login-btn:hover {
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.08),
+                0 12px 30px rgba(0,0,0,0.6);
+    background: #333333;
+}
+
+/* ===== MESSAGE ===== */
+.error {
+    margin-top: 15px;
     min-height: 20px;
+    color: #ffb3b3;
+}
+
+/* responsive */
+@media (max-width: 600px) {
+    .input-group,
+    .options {
+        width: 90%;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-box {
+        width: 100%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="fade"></div>
+<div id="fade-black"></div>
 
-<div id="login">
+<div class="login-wrapper">
 
     <div class="logo" id="logoGroup">
         <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
@@ -111,18 +213,27 @@ button {
     </div>
 
     <div class="input-group">
-        <div class="input-box">
+        <div class="input-box username">
             <span class="icon">👤</span>
-            <input id="username" placeholder="Username">
+            <input type="text" id="username" placeholder="Username">
         </div>
-        <div class="input-box">
+
+        <div class="input-box password">
             <span class="icon">🔒</span>
-            <input id="password" type="password" placeholder="Password">
+            <input type="password" id="password" placeholder="Password">
         </div>
     </div>
 
-    <button onclick="login()">Sign In</button>
-    <div id="msg"></div>
+    <div class="options">
+        <label class="checkbox">
+            <input type="checkbox" checked>
+            <span class="custom-check"></span>
+            Erase data after log out?
+        </label>
+    </div>
+
+    <button class="login-btn" onclick="login()">Sign In</button>
+    <div class="error" id="error"></div>
 </div>
 
 <script>
@@ -130,32 +241,38 @@ const USERNAME = "admin";
 const PASSWORD = "alphabest";
 
 function login() {
-    if (username.value !== USERNAME || password.value !== PASSWORD) {
-        msg.style.color = "#ffb3b3";
-        msg.innerText = "Invalid credentials";
+    const u = username.value;
+    const p = password.value;
+    const error = document.getElementById("error");
+
+    if (u !== USERNAME || p !== PASSWORD) {
+        error.style.color = "#ffb3b3";
+        error.innerText = "Invalid credentials";
         return;
     }
 
-    msg.style.color = "#9dffb3";
-    msg.innerText = "Login successful...";
+    // success message
+    error.style.color = "#9dffb3";
+    error.innerText = "Login successful…";
 
-    // pause to let user catch up
+    // pause cho người dùng bắt kịp
     setTimeout(() => {
         const logos = document.getElementById("logoGroup");
 
         logos.style.position = "fixed";
         logos.style.top = "20px";
         logos.style.left = "20px";
-        logos.style.transform = "scale(0.75)";
         logos.style.margin = "0";
+        logos.style.transform = "scale(0.75)";
 
-        document.getElementById("fade").style.opacity = "1";
-    }, 1600);
+        document.getElementById("fade-black").style.opacity = "0.85";
+        document.body.style.pointerEvents = "none";
+    }, 1500);
 
-    // redirect to home
+    // redirect sang home
     setTimeout(() => {
         window.location.href = "home.html";
-    }, 3600);
+    }, 3800);
 }
 </script>
 

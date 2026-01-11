@@ -125,7 +125,13 @@ body::before {
     text-align: center;
     z-index: 5;
     pointer-events: none;
-    font-family: "Consolas", "Courier New", monospace;
+
+    opacity: 1;
+    transition: opacity 1.2s ease;
+}
+
+.countdown-hud.fade-out {
+    opacity: 0;
 }
 
 .cd-title {
@@ -233,13 +239,15 @@ updateCountdown();
 
 function navigate(e, url) {
     e.preventDefault();
-    const app = document.getElementById("app");
-    app.classList.add("fade-out");
+
+    document.getElementById("app").classList.add("fade-out");
+    document.querySelector(".countdown-hud").classList.add("fade-out");
 
     setTimeout(() => {
         window.location.href = url;
     }, 1200);
 }
+
 </script>
 
 </body>

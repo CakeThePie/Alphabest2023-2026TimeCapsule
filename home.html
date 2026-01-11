@@ -163,11 +163,17 @@ body::before {
 
 <body>
 <script>
-const targetDate = new Date(2026, 5, 11, 0, 0, 0).getTime();
+/*
+11 June 2026 00:00 Vietnam time (UTC+7)
+→ Convert to UTC:
+2026-06-10 17:00 UTC
+*/
+
+const targetUTC = Date.UTC(2026, 5, 10, 17, 0, 0);
 
 function updateCountdown() {
     const now = Date.now();
-    let diff = targetDate - now;
+    let diff = targetUTC - now;
 
     if (diff < 0) diff = 0;
 
@@ -177,7 +183,10 @@ function updateCountdown() {
     const seconds = Math.floor((diff % 60000) / 1000);
 
     document.getElementById("cd-time").innerText =
-        `${String(days).padStart(2,"0")}:${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+        String(days).padStart(2,"0") + ":" +
+        String(hours).padStart(2,"0") + ":" +
+        String(minutes).padStart(2,"0") + ":" +
+        String(seconds).padStart(2,"0");
 }
 
 setInterval(updateCountdown, 1000);

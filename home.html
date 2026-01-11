@@ -27,6 +27,22 @@ body::before {
     z-index: 0;
 }
 
+/* ================= PAGE FADE ================= */
+
+#page-fade {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.7s ease;
+}
+
+#page-fade.active {
+    opacity: 1;
+}
+
 /* ================= TOP UI ================= */
 
 .top-ui {
@@ -64,7 +80,7 @@ body::before {
     opacity: 0;
     transform: translateY(10px);
     animation: searchFade 2s ease forwards;
-    animation-delay: 1.3s;   /* sau logo */
+    animation-delay: 1.3s;
 }
 
 .search-bar input {
@@ -87,7 +103,7 @@ body::before {
 
     opacity: 0;
     animation: menuFade 1.8s ease forwards;
-    animation-delay: 1.9s;   /* sau search */
+    animation-delay: 1.9s;
 }
 
 .menu a {
@@ -121,7 +137,7 @@ body::before {
     to { opacity: 1; }
 }
 
-/* ================= TACTICAL COUNTDOWN ================= */
+/* ================= COUNTDOWN ================= */
 
 .countdown-hud {
     position: fixed;
@@ -157,24 +173,23 @@ body::before {
     letter-spacing: 2px;
     color: rgba(180,255,200,0.5);
 }
-
 </style>
 </head>
 
 <body>
+
+<div id="page-fade"></div>
+
 <script>
 /*
 11 June 2026 00:00 Vietnam time (UTC+7)
-→ Convert to UTC:
-2026-06-10 17:00 UTC
+→ 2026-06-10 17:00 UTC
 */
-
 const targetUTC = Date.UTC(2026, 5, 10, 17, 0, 0);
 
 function updateCountdown() {
     const now = Date.now();
     let diff = targetUTC - now;
-
     if (diff < 0) diff = 0;
 
     const days = Math.floor(diff / 86400000);
@@ -191,32 +206,44 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+/* ===== PAGE TRANSITION ===== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const fade = document.getElementById("page-fade");
+
+    document.querySelectorAll(".menu a").forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            fade.classList.add("active");
+
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 700);
+        });
+    });
+});
 </script>
 
 <div class="top-ui">
-
-    <!-- LOGO -->
     <div class="logo">
         <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
         <img src="Alphabest Logo.png">
     </div>
 
-    <!-- SEARCH -->
     <div class="search-bar">
         <input type="text" placeholder="Search memories...">
     </div>
 
-    <!-- MENU -->
     <div class="menu">
         <a href="about.html">ABOUT US</a>
         <a href="album.html">ALBUM</a>
         <a href="thought.html">OUR THOUGHT</a>
         <a href="chat.html">CHAT</a>
     </div>
-
 </div>
-    
-<div class="countdown-hud" id="countdown">
+
+<div class="countdown-hud">
     <div class="cd-title">FINAL EXAM COUNTDOWN</div>
     <div class="cd-time" id="cd-time">00:00:00:00</div>
     <div class="cd-sub">TARGET DATE — 11 JUNE 2026</div>

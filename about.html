@@ -19,9 +19,15 @@ body {
     background: url("class.jpg") center / cover no-repeat fixed;
     color: #eaeaea;
     display: flex;
+    transition: opacity 1.2s ease;
 }
 
-/* Dark overlay – giống home */
+/* FADE OUT STATE */
+body.fade-out {
+    opacity: 0;
+}
+
+/* Dark overlay */
 body::before {
     content: "";
     position: fixed;
@@ -52,7 +58,6 @@ body::before {
 .sidebar h2 {
     font-size: 14px;
     letter-spacing: 2px;
-    font-weight: 600;
     margin-bottom: 30px;
     opacity: 0;
     animation: fadeUp 1.2s ease forwards;
@@ -79,7 +84,7 @@ body::before {
     color: #9dffb3;
 }
 
-/* ================= RETURN LINK ================= */
+/* ================= RETURN ================= */
 
 .return {
     position: fixed;
@@ -128,7 +133,6 @@ body::before {
 .section h1 {
     font-size: 36px;
     margin-bottom: 26px;
-    font-weight: 600;
     letter-spacing: 1px;
 
     opacity: 0;
@@ -144,7 +148,6 @@ body::before {
     font-family: "Merriweather", serif;
     font-size: 17px;
     line-height: 1.9;
-    color: #e0e0e0;
 
     opacity: 0;
     transform: translateY(10px);
@@ -175,28 +178,6 @@ html {
     from { opacity: 0; transform: translateX(-10px); }
     to   { opacity: 1; transform: translateX(0); }
 }
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 900px) {
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .content {
-        margin-left: 0;
-        padding: 50px 30px 100px;
-    }
-
-    .return {
-        left: 18px;
-        bottom: 18px;
-    }
-}
 </style>
 </head>
 
@@ -211,38 +192,38 @@ html {
 </div>
 
 <!-- RETURN -->
-<a href="home.html" class="return">
+<a href="#" class="return" id="returnBtn">
     <span>←</span> Return
 </a>
 
 <!-- CONTENT -->
 <div class="content">
-
     <div class="section" id="one">
         <h1>We are the one</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
 
     <div class="section" id="lead">
         <h1>The one who lead the way</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
 
     <div class="section" id="done">
         <h1>What we have done</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.
-        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
-
 </div>
+
+<script>
+document.getElementById("returnBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 1200);
+});
+</script>
 
 </body>
 </html>

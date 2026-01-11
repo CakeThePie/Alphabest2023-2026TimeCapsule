@@ -47,7 +47,14 @@ body::before {
 
 /* Khi login */
 .logo.fly {
-    transform: translate(-220px, -220px); /* chỉnh px để logo bay lên góc trên trái */
+    position: fixed;    /* ra khỏi flow */
+    top: 10px;          /* cách mép trên */
+    left: 10px;         /* cách mép trái */
+    margin: 0;          /* xóa margin ban đầu */
+    transform: translate(0,0); /* giữ size */
+    z-index: 10;
+    transition: top 1s cubic-bezier(0.4,0,0.2,1),
+                left 1s cubic-bezier(0.4,0,0.2,1);
 }
 
 .logo img {

@@ -49,23 +49,28 @@ body::before {
     font-size: 14px;
     letter-spacing: 2px;
     font-weight: 600;
-    opacity: 0.7;
+    opacity: 0;
     margin-bottom: 30px;
+    animation: fadeUp 1.2s ease forwards;
 }
 
+/* sidebar items fade lần lượt */
 .sidebar a {
     display: block;
     color: #ddd;
     text-decoration: none;
     margin-bottom: 18px;
     font-size: 15px;
-    opacity: 0.85;
-    transition: 0.25s;
+    opacity: 0;
+    transform: translateX(-6px);
+    animation: fadeLeft 1.2s ease forwards;
 }
 
+.sidebar a:nth-child(2) { animation-delay: 0.4s; }
+.sidebar a:nth-child(3) { animation-delay: 0.6s; }
+.sidebar a:nth-child(4) { animation-delay: 0.8s; }
+
 .sidebar a:hover {
-    opacity: 1;
-    transform: translateX(6px);
     color: #9dffb3;
 }
 
@@ -83,23 +88,55 @@ body::before {
     margin-bottom: 140px;
 }
 
+/* SUBJECT FADE IN */
 .section h1 {
     font-size: 36px;
     margin-bottom: 26px;
     font-weight: 600;
     letter-spacing: 1px;
+
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 1.4s ease forwards;
 }
 
+/* delay từng section */
+.section:nth-of-type(1) h1 { animation-delay: 0.6s; }
+.section:nth-of-type(2) h1 { animation-delay: 1s; }
+.section:nth-of-type(3) h1 { animation-delay: 1.4s; }
+
+/* TEXT FADE SAU SUBJECT */
 .section p {
     font-family: "Merriweather", serif;
     font-size: 17px;
     line-height: 1.9;
     color: #e0e0e0;
+
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 1.4s ease forwards;
 }
+
+/* delay cho text */
+.section:nth-of-type(1) p { animation-delay: 0.9s; }
+.section:nth-of-type(2) p { animation-delay: 1.3s; }
+.section:nth-of-type(3) p { animation-delay: 1.7s; }
 
 /* smooth scroll */
 html {
     scroll-behavior: smooth;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ================= RESPONSIVE ================= */
@@ -140,8 +177,7 @@ html {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            nisi ut aliquip ex ea commodo consequat.
         </p>
     </div>
 
@@ -150,8 +186,7 @@ html {
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-            Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-            Praesent mauris. Fusce nec tellus sed augue semper porta.
+            Sed nisi. Nulla quis sem at nibh elementum imperdiet.
         </p>
     </div>
 
@@ -160,8 +195,7 @@ html {
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.
-            Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque
-            sem at dolor. Maecenas mattis. Sed convallis tristique sem.
+            Curabitur tortor. Pellentesque nibh.
         </p>
     </div>
 

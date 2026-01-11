@@ -157,6 +157,16 @@ body::before {
     letter-spacing: 2px;
     color: rgba(180,255,200,0.5);
 }
+.page-ui {
+    position: relative;
+    z-index: 5;
+    transition: transform 1.2s ease, opacity 1.2s ease;
+}
+
+.page-ui.slide-up {
+    transform: translateY(-120px);
+    opacity: 0;
+}
 
 </style>
 </head>
@@ -186,8 +196,21 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
+<script>
+function goPage(e, url){
+    e.preventDefault();
 
-<div class="top-ui">
+    const ui = document.querySelector(".page-ui");
+    ui.classList.add("slide-up");
+
+    setTimeout(()=>{
+        window.location.href = url;
+    }, 1200);
+}
+</script>
+
+<div class="page-ui">
+  <div class="top-ui">
 
     <!-- LOGO -->
     <div class="logo">
@@ -202,13 +225,15 @@ updateCountdown();
 
     <!-- MENU -->
     <div class="menu">
-        <a href="about.html">ABOUT US</a>
-        <a href="album.html">ALBUM</a>
-        <a href="thought.html">OUR THOUGHT</a>
-        <a href="chat.html">CHAT</a>
+        <a href="about.html" onclick="goPage(event, 'about.html')">ABOUT US</a>
+        <a href="album.html" onclick="goPage(event, 'album.html')">ALBUM</a>
+        <a href="thought.html" onclick="goPage(event, 'thought.html')">OUR THOUGHT</a>
+        <a href="chat.html" onclick="goPage(event, 'chat.html')">CHAT</a>
     </div>
 
+  </div>
 </div>
+
     
 <div class="countdown-hud" id="countdown">
     <div class="cd-title">NATIONAL HIGHSCHOOL EXAM</div>

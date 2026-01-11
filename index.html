@@ -35,24 +35,23 @@ body::before {
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    position: absolute; /* để dễ di chuyển */
-    top: 50%;           /* giữa container */
+    position: absolute;     /* để di chuyển dễ dàng */
+    top: 50%;               /* căn giữa màn hình */
     left: 50%;
-    transform: translate(-50%, -50%); /* căn giữa */
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 16px;
     transition: top 1s cubic-bezier(0.4,0,0.2,1),
                 left 1s cubic-bezier(0.4,0,0.2,1),
                 transform 1s cubic-bezier(0.4,0,0.2,1);
+    z-index: 2;             /* trên form */
 }
 
-/* Khi login */
+/* Khi login thành công */
 .logo.fly {
     top: 10px;
     left: 10px;
-    transform: translate(0, 0); /* giữ nguyên size */
+    transform: translate(0, 0); /* giữ size, không scale */
 }
 
 .logo img {

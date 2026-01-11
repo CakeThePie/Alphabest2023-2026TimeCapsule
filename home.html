@@ -115,71 +115,18 @@ body::before {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
-/* Top bar layout */
-.top-bar {
-    position: fixed;
-    top: 45px;
-    left: 45px;
-    right: 45px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 5;
-}
-
-/* Logo góc trái */
-.logo {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    opacity: 0;
-    animation: logoFade 2s ease forwards;
-    animation-delay: 0.8s;
-}
-
-.logo img {
-    width: 64px;
-}
-
-/* Language */
-.language {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    opacity: 0.85;
-    font-size: 14px;
-}
-
-.language:hover {
-    opacity: 1;
-}
-
-/* Icon quả địa cầu */
-.language::before {
-    content: "🌐";
-    font-size: 16px;
-}
 </style>
 </head>
 
 <body>
 
-<div class="top-bar">
+<div class="top-ui">
 
     <!-- LOGO -->
     <div class="logo">
         <img src="THPT Chuyên Bạc Liêu-Picsart-AiImageEnhancer.png">
         <img src="Alphabest Logo.png">
     </div>
-
-    <!-- LANGUAGE -->
-    <div class="language">
-        Language
-    </div>
-
-</div>
 
     <!-- SEARCH -->
     <div class="search-bar">

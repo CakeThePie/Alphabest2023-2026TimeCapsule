@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alphabest – About Us</title>
+
+<!-- Merriweather -->
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #0e0e0e;
+    color: #eaeaea;
+    display: flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: #111;
+    padding: 40px 30px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar h2 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    opacity: 0.6;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin-bottom: 18px;
+    font-size: 15px;
+    opacity: 0.85;
+    transition: 0.25s;
+}
+
+.sidebar a:hover {
+    opacity: 1;
+    transform: translateX(6px);
+    color: #9dffb3;
+}
+
+/* ================= CONTENT ================= */
+
+.content {
+    margin-left: 260px;
+    padding: 80px 80px 120px;
+    max-width: 900px;
+}
+
+.section {
+    margin-bottom: 120px;
+}
+
+.section h1 {
+    font-size: 36px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section p {
+    font-family: "Merriweather", serif;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #d6d6d6;
+}
+
+/* smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 40px 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar">
+    <h2>ABOUT</h2>
+    <a href="#one">We are the one</a>
+    <a href="#lead">The one who lead the way</a>
+    <a href="#done">What we have done</a>
+</div>
+
+<!-- ================= CONTENT ================= -->
+<div class="content">
+
+    <div class="section" id="one">
+        <h1>We are the one</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </p>
+    </div>
+
+    <div class="section" id="lead">
+        <h1>The one who lead the way</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
+            Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. 
+            Praesent mauris. Fusce nec tellus sed augue semper porta.
+        </p>
+    </div>
+
+    <div class="section" id="done">
+        <h1>What we have done</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. 
+            Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque 
+            sem at dolor. Maecenas mattis. Sed convallis tristique sem.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

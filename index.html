@@ -40,8 +40,14 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;        /* khoảng cách giữa 2 logo */
+    gap: 16px;
     margin-bottom: 30px;
+    transition: transform 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Khi login */
+.logo.fly {
+    transform: translate(-220px, -220px); /* chỉnh px để logo bay lên góc trên trái */
 }
 
 .logo img {
@@ -209,19 +215,6 @@ body::before {
     transition: opacity 1s ease;
     pointer-events: none; /* tránh click khi đang fade */
 }
-/* Khi login, logo bay lên góc trên trái */
-.logo.fly {
-    position: fixed;       /* đưa logo ra khỏi flow, tránh ảnh hưởng layout */
-    top: 10px;             /* khoảng cách từ mép trên */
-    left: 10px;            /* khoảng cách từ mép trái */
-    margin: 0;             /* loại margin cũ */
-    transform: translate(0, 0); /* giữ nguyên kích thước, không scale */
-    z-index: 10;           /* logo luôn nổi trên các element khác */
-    transition: top 1.2s cubic-bezier(0.4,0,0.2,1),
-                left 1.2s cubic-bezier(0.4,0,0.2,1),
-                transform 1.2s cubic-bezier(0.4,0,0.2,1),
-                position 0s;
-}
 </style>
 </head>
 
@@ -289,8 +282,8 @@ function login() {
         
         // **Logo bay lên góc**
         const logo = document.querySelector(".logo");
-        logo.classList.add("fly");
-        
+        logo.classList.add("fly"); // trigger transform animation
+
         // Bắt đầu fade out toàn bộ phần login-wrapper (chỉ fade input, checkbox, button, error)
         const toFade = document.querySelectorAll(".input-group, .options, .login-btn, #error");
         toFade.forEach(el => {

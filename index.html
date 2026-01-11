@@ -53,7 +53,10 @@ body::before {
 /* khi login xong */
 .bg-fade .bg-old { opacity: 0; }
 .bg-fade .bg-new { opacity: 1; }
-.bg-fade::before { opacity: 2.5; }
+.bg-fade::before {
+    opacity: 0;
+    transition: opacity 2.5s ease;   /* nền mờ chậm hơn */
+}
 
 .login-wrapper {
     position: relative;
